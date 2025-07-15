@@ -45,7 +45,7 @@ const App = () => {
   useEffect(() => {
     const fetchProviders = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/providers?location=${location}`);
+        const res = await axios.get(`https://backend1-rtt3.onrender.com/api/providers?location=${location}`);
         console.log('Fetched providers:', res.data);
         setProviders(res.data);
       } catch (err) {
@@ -63,19 +63,19 @@ const App = () => {
       const refreshToken = localStorage.getItem('refreshToken');
       if (token) {
         try {
-          const res = await axios.get('http://localhost:5000/api/auth/me', {
+          const res = await axios.get('https://backend1-rtt3.onrender.com/api/auth/me', {
             headers: { Authorization: `Bearer ${token}` },
           });
           setUser(res.data);
         } catch (err) {
           if (err.response?.status === 401 && refreshToken) {
             try {
-              const refreshRes = await axios.post('http://localhost:5000/api/auth/refresh-token', {
+              const refreshRes = await axios.post('https://backend1-rtt3.onrender.com/api/auth/refresh-token', {
                 refreshToken,
               });
               localStorage.setItem('token', refreshRes.data.token);
               localStorage.setItem('refreshToken', refreshRes.data.refreshToken);
-              const res = await axios.get('http://localhost:5000/api/auth/me', {
+              const res = await axios.get('https://backend1-rtt3.onrender.com/api/auth/me', {
                 headers: { Authorization: `Bearer ${refreshRes.data.token}` },
               });
               setUser(res.data);
@@ -99,7 +99,7 @@ const App = () => {
   const handleSearch = async ({ query, location }) => {
     try {
       const res = await axios.get(
-        `http://localhost:5000/api/providers?query=${query}&location=${location}`
+        `https://backend1-rtt3.onrender.com/api/providers?query=${query}&location=${location}`
       );
       console.log('Search results:', res.data);
       setProviders(res.data);
@@ -116,7 +116,7 @@ const App = () => {
     }
     try {
       const orderRes = await axios.post(
-        'http://localhost:5000/api/payments/create-order',
+        'https://backend1-rtt3.onrender.com/api/payments/create-order',
         { amount: bookingData.service.price, bookingId: bookingData.bookingId },
         { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
       );
@@ -129,7 +129,7 @@ const App = () => {
         handler: async (response) => {
           try {
             const verifyRes = await axios.post(
-              'http://localhost:5000/api/payments/verify-payment',
+              'https://backend1-rtt3.onrender.com/api/payments/verify-payment',
               {
                 orderId: response.razorpay_order_id,
                 razorpayPaymentId: response.razorpay_payment_id,
@@ -141,7 +141,7 @@ const App = () => {
             alert(verifyRes.data.message);
             setShowBookingModal(false);
             // Refresh providers to update ratings
-            const res = await axios.get(`http://localhost:5000/api/providers?location=${location}`);
+            const res = await axios.get(`https://backend1-rtt3.onrender.com/api/providers?location=${location}`);
             setProviders(res.data);
           } catch (err) {
             alert(err.response?.data?.message || 'Payment verification failed');
