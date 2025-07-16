@@ -9,7 +9,7 @@ const ReviewSection = ({ providerId }) => {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/providers/${providerId}`);
+        const res = await axios.get(`https://backend1-rtt3.onrender.com/api/providers/${providerId}`);
         setReviews(res.data.reviews);
       } catch (err) {
         console.error('Fetch reviews error:', err);
@@ -21,7 +21,7 @@ const ReviewSection = ({ providerId }) => {
   const handleSubmit = async () => {
     try {
       const res = await axios.post(
-        `http://localhost:5000/api/providers/${providerId}/reviews`,
+        `https://backend1-rtt3.onrender.com/api/providers/${providerId}/reviews`,
         { rating, comment },
         { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
       );

@@ -19,7 +19,7 @@ const AuthModal = ({ isOpen, onClose, onAuth }) => {
     try {
       const url = isLogin ? '/api/auth/login' : '/api/auth/register';
       const data = isLogin ? { email, password } : { name, email, password, role };
-      const res = await axios.post(`http://localhost:5000${url}`, data);
+      const res = await axios.post(`https://backend1-rtt3.onrender.com${url}`, data);
       localStorage.setItem('token', res.data.token);
       localStorage.setItem('refreshToken', res.data.refreshToken);
       onAuth(res.data.user);
@@ -35,7 +35,7 @@ const AuthModal = ({ isOpen, onClose, onAuth }) => {
   const handleForgotPassword = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/forgot-password', { email });
+      const res = await axios.post('https://backend1-rtt3.onrender.com/api/auth/forgot-password', { email });
       setSuccess(res.data.message);
       setError('');
       setIsForgotPassword(false);
@@ -49,7 +49,7 @@ const AuthModal = ({ isOpen, onClose, onAuth }) => {
   const handleVerifyOTP = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/verify-otp', { email, otp });
+      const res = await axios.post('https://backend1-rtt3.onrender.com/api/auth/verify-otp', { email, otp });
       setSuccess(res.data.message);
       setError('');
       setIsOTP(false);
@@ -62,7 +62,7 @@ const AuthModal = ({ isOpen, onClose, onAuth }) => {
   const handleResetPassword = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/reset-password', { email, otp, newPassword });
+      const res = await axios.post('https://backend1-rtt3.onrender.com/api/auth/reset-password', { email, otp, newPassword });
       setSuccess(res.data.message);
       setError('');
       setTimeout(() => {

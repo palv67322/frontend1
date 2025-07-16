@@ -35,7 +35,7 @@ const BookingModal = ({ provider, isOpen, onClose, onBook }) => {
     try {
       setBookingStatus('Creating booking...');
       const res = await axios.post(
-        'http://localhost:5000/api/bookings',
+        'https://backend1-rtt3.onrender.com/api/bookings',
         {
           providerId: provider._id,
           serviceId: selectedService._id,
