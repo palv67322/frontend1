@@ -123,7 +123,7 @@ const ProviderProfile = ({ provider, onBack, onBook }) => {
       <div className="flex items-center">
         {currentProvider.photo && (
           <img
-            src={`https://backend1-rtt3.onrender.com${currentProvider.photo}`}
+            src={currentProvider.photo}
             alt={currentProvider.name}
             className="w-24 h-24 rounded-full mr-4"
           />

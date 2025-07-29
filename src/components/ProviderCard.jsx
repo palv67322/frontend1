@@ -5,7 +5,7 @@ const ProviderCard = ({ provider, onSelect, onBook }) => {
     <div className="p-4 bg-white rounded-lg shadow-md">
       {provider.photo && (
         <img
-          src={`https://backend1-rtt3.onrender.com${provider.photo}`}
+          src={provider.photo}
           alt={provider.name}
           className="w-16 h-16 rounded-full mx-auto mb-2"
         />
